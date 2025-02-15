@@ -164,7 +164,7 @@ async def get_referrals_by_referrer_id(
     )
     referrer = referrer_result.scalar_one_or_none()
     if referrer is None:
-        raise HTTPException(status_code=404, detail="Нт тпкого пользователя")
+        raise HTTPException(status_code=404, detail="пользователь отсутствует")
     result = await db.execute(
         select(User).where(User.referrer_id == referrer_id)
     )

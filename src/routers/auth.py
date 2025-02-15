@@ -21,7 +21,7 @@ router = APIRouter(tags=["auth"])
 async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
     is_valid = await verify_email(user_data.email)
     if not is_valid:
-        raise HTTPException(status_code=400, detail="НЕ коректный Email")
+        raise HTTPException(status_code=400, detail="Некорректный Email")
     existing_user = await db.execute(select(User).filter(User.email == user_data.email))
     if existing_user.scalar():
         raise HTTPException(status_code=400, detail="Email уже зарегистрирован")
